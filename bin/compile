@@ -16,6 +16,7 @@ curl -o Essentials.zip -s -L "https://ci.ender.zone/job/EssentialsX/lastSuccessf
 unzip Essentials.zip > /dev/null 2>&1
 mv target/Essentials* $BUILD_DIR/plugins/
 curl -o $BUILD_DIR/plugins/FastAsyncWorldEdit.jar -s -L "http://empcraft.com/fawe/latest.php?bukkit"
+curl -o $BUILD_DIR/plugins/FastAsyncWorldEdit/textures/textures.jar -s -L "https://launcher.mojang.com/mc/game/1.12.2/client/0f275bc1547d01fa5f56ba34bdc87d981ee12daf/client.jar"
 curl -o ImageOnMap.zip -s -L "https://jenkins.carrade.eu/job/ImageOnMap/lastSuccessfulBuild/artifact/target/*zip*/target.zip"
 unzip ImageOnMap.zip > /dev/null 2>&1
 mv target/ImageOnMap* $BUILD_DIR/plugins/
