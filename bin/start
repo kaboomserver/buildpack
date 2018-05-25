@@ -1,0 +1,31 @@
+#!/bin/bash
+mkdir -p crash-reports/ dumps/
+touch banned-ips.json banned-ips.json.backup banned-players.json banned-players.json.backup ops.json ops.json.backup usercache.json whitelist.json whitelist.json.backup
+chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
+chmod 400 'find . -type f'
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" --exclude-from="bin/excludes" connect@kaboom.pw:/home/connect/sync/ .
+
+if [ ! -d worlds/ ]; then
+    cp -r reset/worlds/ .
+else
+    rm -rf worlds/world/region/
+    cp -r reset/worlds/world/region/ worlds/world/
+fi
+
+while true; do
+    bin/inotifywait -r -e modify,attrib,close_write,move,create,delete .
+    rsync -avz -e "ssh -o StrictHostKeyChecking=no" --exclude-from="bin/excludes" plugins worlds connect@kaboom.pw:/home/connect/sync/ > /dev/null 2>&1
+    sleep 1
+done &
+
+while true; do
+    ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -o ServerAliveCountMax=9999 -S none -T -R 25565:localhost:25565 connect@kaboom.pw > /dev/null 2>&1
+    sleep 1
+done &
+
+while true; do
+    java -Xms300m -XX:MinHeapFreeRatio=1 -XX:MaxHeapFreeRatio=10 -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:G1MixedGCLiveThresholdPercent=50 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:MaxGCPauseMillis=100 -XX:+AggressiveOpts -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:InitiatingHeapOccupancyPercent=10 -XX:TargetSurvivorRatio=90 -XX:+UseLargePagesInMetaspace -Dcom.mojang.eula.agree=true -Dlog4j.configurationFile=log4j2.xml -jar minecraft-server.jar --world-dir=worlds > /dev/null 2>&1
+    sleep 1
+done &
+
+sleep infinity

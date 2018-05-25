@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "Kaboom"
+exit 0

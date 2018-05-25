@@ -1,0 +1,9 @@
+{
+  "name": "Kaboom.pw",
+  "stack": "heroku-18",
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-jvm-common"
+    }
+  ]
+}
