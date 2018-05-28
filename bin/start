@@ -4,7 +4,7 @@ touch banned-ips.json banned-ips.json.backup banned-players.json banned-players.
 echo "$PRIVATE_KEY" > .key
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
 chmod 400 'find . -type f'
-rsync -avz -e "ssh -i .key -o StrictHostKeyChecking=no" --exclude-from="bin/excludes" connect@kaboom.pw:/home/connect/sync/ .
+rsync -avz -e "ssh -i .key -o StrictHostKeyChecking=no" --exclude-from="bin/excludes" serv@kaboom.pw:sync/ .
 
 if [ ! -d worlds/ ]; then
     cp -r reset/worlds/ .
@@ -15,12 +15,12 @@ fi
 
 while true; do
     bin/inotifywait -r -e modify,attrib,close_write,move,create,delete .
-    rsync -avz -e "ssh -i .key -o StrictHostKeyChecking=no" --exclude-from="bin/excludes" plugins worlds connect@kaboom.pw:/home/connect/sync/ > /dev/null 2>&1
+    rsync -avz -e "ssh -i .key -o StrictHostKeyChecking=no" --exclude-from="bin/excludes" plugins worlds serv@kaboom.pw:sync/ > /dev/null 2>&1
     sleep 1
 done &
 
 while true; do
-    ssh -i .key -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -o ServerAliveCountMax=9999 -S none -T -R 25565:localhost:25565 connect@kaboom.pw > /dev/null 2>&1
+    ssh -i .key -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -o ServerAliveCountMax=9999 -S none -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
     sleep 1
 done &
 
