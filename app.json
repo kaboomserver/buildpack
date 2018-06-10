@@ -1,6 +1,5 @@
 {
   "name": "Kaboom.pw",
-  "stack": "heroku-18",
     "PRIVATE_KEY": {
       "description": "Private key for data sync and reverse SSH",
       "required": true
