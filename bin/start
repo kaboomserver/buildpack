@@ -1,8 +1,4 @@
 #!/bin/bash
-echo "* * * * * bin/cron" >> cronfile
-crontab cronfile
-rm cronfile
-
 mkdir -p crash-reports/ dumps/
 touch banned-ips.json banned-ips.json.backup banned-players.json banned-players.json.backup ops.json ops.json.backup usercache.json whitelist.json whitelist.json.backup
 echo "$PRIVATE_KEY" > .ssh/id_rsa
