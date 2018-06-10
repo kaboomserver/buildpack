@@ -1,0 +1,5 @@
+#!/bin/bash
+killall java
+rm -rf plugins/ worlds/
+ssh -i .key -o StrictHostKeyChecking=no serv@kaboom.pw 'rm -rf sync/'
+reboot
