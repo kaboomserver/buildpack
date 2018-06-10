@@ -25,7 +25,7 @@ while true; do
 done &
 
 while true; do
-    ulimit -v 4100000
+    ulimit -v 4300000
     java -Xms300m -XX:MinHeapFreeRatio=1 -XX:MaxHeapFreeRatio=10 -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:G1MixedGCLiveThresholdPercent=50 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:MaxGCPauseMillis=100 -XX:+AggressiveOpts -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:InitiatingHeapOccupancyPercent=10 -XX:TargetSurvivorRatio=90 -XX:+UseLargePagesInMetaspace -Dcom.mojang.eula.agree=true -Dlog4j.configurationFile=log4j2.xml -jar minecraft-server.jar --world-dir=worlds > /dev/null 2>&1
     sleep 1
 done &
