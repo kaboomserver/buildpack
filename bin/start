@@ -1,9 +1,4 @@
 #!/bin/bash
-while true; do
-    ssh -i .key -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -o ServerAliveCountMax=9999 -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
-    sleep 1
-done &
-
 mkdir -p crash-reports/ dumps/
 touch banned-ips.json banned-ips.json.backup banned-players.json banned-players.json.backup ops.json ops.json.backup usercache.json whitelist.json whitelist.json.backup
 echo "$PRIVATE_KEY" > .key
@@ -21,6 +16,11 @@ fi
 while true; do
     bin/inotifywait -r -e modify,attrib,close_write,move,create,delete .
     rsync -Waqz -e "ssh -i .key -o StrictHostKeyChecking=no -N -T -c aes256-ctr -o Compression=no -x" --exclude-from="bin/excludes" plugins worlds serv@kaboom.pw:sync/ > /dev/null 2>&1
+    sleep 1
+done &
+
+while true; do
+    ssh -i .key -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -o ServerAliveCountMax=9999 -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
     sleep 1
 done &
 
