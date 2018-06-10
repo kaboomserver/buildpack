@@ -4,7 +4,7 @@ touch banned-ips.json banned-ips.json.backup banned-players.json banned-players.
 echo "$PRIVATE_KEY" > .key
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
 chmod 400 'find . -type f'
-rsync -Waqz -e "ssh -i .key -o StrictHostKeyChecking=no -N -T -c arcfour -o Compression=no -x" --exclude-from="bin/excludes" serv@kaboom.pw:sync/ .
+rsync -Waqz -e "ssh -i .key -o StrictHostKeyChecking=no -N -T -c aes256-ctr -o Compression=no -x" --exclude-from="bin/excludes" serv@kaboom.pw:sync/ .
 
 if [ ! -d worlds/ ]; then
     cp -r reset/worlds/ .
@@ -15,7 +15,7 @@ fi
 
 while true; do
     bin/inotifywait -r -e modify,attrib,close_write,move,create,delete .
-    rsync -Waqz -e "ssh -i .key -o StrictHostKeyChecking=no -N -T -c arcfour -o Compression=no -x" --exclude-from="bin/excludes" plugins worlds serv@kaboom.pw:sync/ > /dev/null 2>&1
+    rsync -Waqz -e "ssh -i .key -o StrictHostKeyChecking=no -N -T -c aes256-ctr -o Compression=no -x" --exclude-from="bin/excludes" plugins worlds serv@kaboom.pw:sync/ > /dev/null 2>&1
     sleep 1
 done &
 
