@@ -1,6 +1,5 @@
 #!/bin/bash
-PID="$(pgrep java)"
-kill -9 $PID
+killall java
 rm -rf plugins/ worlds/
 ssh -i .key -o StrictHostKeyChecking=no serv@kaboom.pw 'rm -rf sync/'
 
