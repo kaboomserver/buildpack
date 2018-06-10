@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir -p crash-reports/ dumps/
-touch banned-ips.json banned-players.json ops.json usercache.json version_history.json whitelist.json
+touch banned-ips.json banned-players.json ops.json usercache.json whitelist.json
 echo "$PRIVATE_KEY" > .ssh/id_rsa
 chmod 400 $(find . ! -path "*/.*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
@@ -25,6 +25,7 @@ while true; do
 done &
 
 while true; do
+    ulimit -v 4200000
     java -Xms300m -XX:MinHeapFreeRatio=1 -XX:MaxHeapFreeRatio=10 -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:G1MixedGCLiveThresholdPercent=50 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:MaxGCPauseMillis=100 -XX:+AggressiveOpts -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:InitiatingHeapOccupancyPercent=10 -XX:TargetSurvivorRatio=90 -XX:+UseLargePagesInMetaspace -Dcom.mojang.eula.agree=true -Dlog4j.configurationFile=log4j2.xml -jar minecraft-server.jar --world-dir=worlds > /dev/null 2>&1
     sleep 1
 done &
