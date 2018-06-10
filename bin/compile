@@ -7,10 +7,6 @@ mv $BIN_DIR/start $BUILD_DIR/bin/
 mv $BIN_DIR/cron $BUILD_DIR/bin/
 mv $BIN_DIR/excludes $BUILD_DIR/bin/
 
-curl -o inotify-tools.deb -s -L "http://security.ubuntu.com/ubuntu/pool/universe/i/inotify-tools/inotify-tools_3.14-2_amd64.deb"
-dpkg -x *.deb .
-mv usr/bin/inotifywait $BUILD_DIR/bin/
-
 curl -o $BUILD_DIR/minecraft-server.jar -s -L "https://yivesmirror.com/files/paperspigot/PaperSpigot-latest.jar"
 curl -o $BUILD_DIR/plugins/DoBlockImage.jar -s -L "https://api.spiget.org/v2/resources/5454/download"
 curl -o Essentials.zip -s -L "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/*zip*/target.zip"
