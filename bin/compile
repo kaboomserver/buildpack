@@ -7,18 +7,18 @@ mv $BIN_DIR/start $BUILD_DIR/bin/
 mv $BIN_DIR/excludes $BUILD_DIR/bin/
 
 curl -o $BUILD_DIR/minecraft-server.jar -s -L "https://yivesmirror.com/files/paperspigot/PaperSpigot-latest.jar"
-curl -o $BUILD_DIR/plugins/DoBlockImage.jar -s -L "https://api.spiget.org/v2/resources/5454/download"
-curl -o Essentials.zip -s -L "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/*zip*/target.zip"
-unzip Essentials.zip > /dev/null 2>&1
-mv target/Essentials* $BUILD_DIR/plugins/
+#curl -o $BUILD_DIR/plugins/DoBlockImage.jar -s -L "https://api.spiget.org/v2/resources/5454/download"
+#curl -o Essentials.zip -s -L "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/*zip*/target.zip"
+#unzip Essentials.zip > /dev/null 2>&1
+#mv target/Essentials* $BUILD_DIR/plugins/
 curl -o $BUILD_DIR/plugins/FastAsyncWorldEdit.jar -s -L "http://empcraft.com/fawe/latest.php?bukkit"
 curl -o $BUILD_DIR/plugins/FastAsyncWorldEdit/textures/textures.jar -s -L "https://launcher.mojang.com/mc/game/1.12.2/client/0f275bc1547d01fa5f56ba34bdc87d981ee12daf/client.jar"
-curl -o ImageOnMap.zip -s -L "https://jenkins.carrade.eu/job/ImageOnMap/lastSuccessfulBuild/artifact/target/*zip*/target.zip"
-unzip ImageOnMap.zip > /dev/null 2>&1
-mv target/ImageOnMap* $BUILD_DIR/plugins/
-curl -o $BUILD_DIR/plugins/LibsDisguises.jar -s -L "https://ci.md-5.net/job/LibsDisguises/lastSuccessfulBuild/artifact/target/LibsDisguises.jar"
-curl -o $BUILD_DIR/plugins/MySkin.jar -s -L "https://api.spiget.org/v2/resources/52303/download"
+#curl -o ImageOnMap.zip -s -L "https://jenkins.carrade.eu/job/ImageOnMap/lastSuccessfulBuild/artifact/target/*zip*/target.zip"
+#unzip ImageOnMap.zip > /dev/null 2>&1
+#mv target/ImageOnMap* $BUILD_DIR/plugins/
+#curl -o $BUILD_DIR/plugins/LibsDisguises.jar -s -L "https://ci.md-5.net/job/LibsDisguises/lastSuccessfulBuild/artifact/target/LibsDisguises.jar"
+#curl -o $BUILD_DIR/plugins/MySkin.jar -s -L "https://api.spiget.org/v2/resources/52303/download"
 curl -o $BUILD_DIR/plugins/ProtocolLib.jar -s -L "http://ci.dmulloy2.net/job/ProtocolLib/lastStableBuild/artifact/modules/ProtocolLib/target/ProtocolLib.jar"
-URL=$(curl -s https://api.github.com/repos/iSach/UltraCosmetics/releases/latest | grep browser_download_url | cut -d '"' -f 4)
-curl -o $BUILD_DIR/plugins/UltraCosmetics.jar -s -L "$URL"
+#URL=$(curl -s https://api.github.com/repos/iSach/UltraCosmetics/releases/latest | grep browser_download_url | cut -d '"' -f 4)
+#curl -o $BUILD_DIR/plugins/UltraCosmetics.jar -s -L "$URL"
 curl -o $BUILD_DIR/plugins/WorldEdit.jar -s -L "http://builds.enginehub.org/job/worldedit/10120/download/worldedit-bukkit-6.1.9-SNAPSHOT-dist.jar"
