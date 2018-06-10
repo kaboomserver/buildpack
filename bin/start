@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir -p crash-reports/ dumps/
-touch banned-ips.json banned-ips.json.backup banned-players.json banned-players.json.backup ops.json ops.json.backup usercache.json whitelist.json whitelist.json.backup
+touch banned-ips.json banned-players.json ops.json usercache.json version_history.json whitelist.json
 echo "$PRIVATE_KEY" > .ssh/id_rsa
 chmod 400 $(find . ! -path "*/.*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
