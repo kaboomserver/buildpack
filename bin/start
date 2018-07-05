@@ -6,7 +6,7 @@ chmod 400 $(find . ! -path "*/.*" ! -path "./worlds/world/region/*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
 
 if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/worlds/' | awk '{print $1}')" -gt "500000" ]; then
-	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'cd sync/; find . ! -path './plugins/WorldEdit/schematics' -type d -exec rm -rf {} +'
+	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'cd sync/ && find . ! -path './plugins/WorldEdit/schematics' -type d -exec rm -rf {} +'
 fi
 rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from="bin/excludes" serv@kaboom.pw:sync/ .
 
