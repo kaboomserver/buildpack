@@ -4,7 +4,6 @@ touch banned-ips.json banned-players.json ops.json usercache.json whitelist.json
 echo "$PRIVATE_KEY" > .ssh/id_rsa
 chmod 400 $(find . ! -path "*/.*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
-chmod -R 755 reset/worlds/world/region/
 rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from="bin/excludes" serv@kaboom.pw:sync/ .
 
 if [ ! -d worlds/ ]; then
