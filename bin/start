@@ -6,13 +6,6 @@ chmod 400 $(find . ! -path "*/.*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
 rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from="bin/excludes" serv@kaboom.pw:sync/ .
 
-if [ ! -d worlds/ ]; then
-    cp -r reset/worlds/ .
-else
-    rm -rf worlds/world/region/
-    cp -r reset/worlds/world/region/ worlds/world/
-fi
-
 while true; do
     rsync -Waq -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from="bin/excludes" plugins worlds serv@kaboom.pw:sync/ > /dev/null 2>&1
     sleep 5
