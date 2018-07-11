@@ -20,7 +20,7 @@ while true; do
     sleep 1
 done &
 
-bin/tmux new -d -s server 'while true; do
+.bin/tmux new -d -s server 'while true; do
     .bin/java/bin/java -Xms0m -Xmx300m -Xss512k -XX:MinHeapFreeRatio=1 -XX:MaxHeapFreeRatio=10 -XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC -XX:MaxGCPauseMillis=100 -XX:+AggressiveOpts -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:InitiatingHeapOccupancyPercent=10 -XX:TargetSurvivorRatio=90 -XX:-UseBiasedLocking -XX:+UseLargePagesInMetaspace -XX:+UseNUMA -XX:+UseTransparentHugePages -Dcom.mojang.eula.agree=true -Dlog4j.configurationFile=log4j2.xml -jar minecraft-server.jar --world-dir=worlds > /dev/null 2>&1
     sleep 1
 done' &
