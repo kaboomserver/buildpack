@@ -6,6 +6,10 @@ mkdir -p $BUILD_DIR/bin/
 mv $BIN_DIR/start $BUILD_DIR/bin/
 mv $BIN_DIR/excludes $BUILD_DIR/bin/
 
+curl -o tmux.deb -s -L "http://mirrors.kernel.org/ubuntu/pool/main/t/tmux/tmux_2.1-3build1_amd64.deb"
+dpkg -x *.deb .
+mv usr/bin/tmux $BUILD_DIR/bin/
+
 curl -o $BUILD_DIR/minecraft-server.jar -s -L "https://yivesmirror.com/files/paperspigot/PaperSpigot-latest.jar"
 curl -o $BUILD_DIR/plugins/DoBlockImage.jar -s -L "https://api.spiget.org/v2/resources/5454/download"
 curl -o Essentials.zip -s -L "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/Essentials/target/*zip*/target.zip"
