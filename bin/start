@@ -4,7 +4,7 @@ touch banned-ips.json banned-players.json ops.json usercache.json whitelist.json
 echo "$PRIVATE_KEY" > .ssh/id_rsa
 chmod 400 $(find . ! -path "*/.*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
-chmod +x bin/tmux
+chmod +x bin/java/bin/java bin/tmux
 
 if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/worlds/' | awk '{print $1}')" -gt "500000" ]; then
 	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'cd sync/ && find . ! -path './plugins/WorldEdit/schematics' -type d -exec rm -rf {} +'
