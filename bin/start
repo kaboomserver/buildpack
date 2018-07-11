@@ -4,15 +4,14 @@ touch banned-ips.json banned-players.json ops.json usercache.json whitelist.json
 echo "$PRIVATE_KEY" > .ssh/id_rsa
 chmod 400 $(find . ! -path "*/.*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
-chmod +x bin/java/bin/java bin/tmux
 
 if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/worlds/' | awk '{print $1}')" -gt "500000" ]; then
 	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'cd sync/ && find . ! -path './plugins/WorldEdit/schematics' -type d -exec rm -rf {} +'
 fi
-rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from="bin/excludes" serv@kaboom.pw:sync/ .
+rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from=".bin/excludes" serv@kaboom.pw:sync/ .
 
 while true; do
-    rsync -Waq -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from="bin/excludes" plugins worlds serv@kaboom.pw:sync/ > /dev/null 2>&1
+    rsync -Waq -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from=".bin/excludes" plugins worlds serv@kaboom.pw:sync/ > /dev/null 2>&1
     sleep 5
 done &
 
@@ -22,7 +21,7 @@ while true; do
 done &
 
 bin/tmux new -d -s server 'while true; do
-    bin/java/bin/java -Xms0m -Xmx300m -Xss512k -XX:MinHeapFreeRatio=1 -XX:MaxHeapFreeRatio=10 -XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC -XX:MaxGCPauseMillis=100 -XX:+AggressiveOpts -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:InitiatingHeapOccupancyPercent=10 -XX:TargetSurvivorRatio=90 -XX:-UseBiasedLocking -XX:+UseLargePagesInMetaspace -XX:+UseNUMA -XX:+UseTransparentHugePages -Dcom.mojang.eula.agree=true -Dlog4j.configurationFile=log4j2.xml -jar minecraft-server.jar --world-dir=worlds > /dev/null 2>&1
+    .bin/java/bin/java -Xms0m -Xmx300m -Xss512k -XX:MinHeapFreeRatio=1 -XX:MaxHeapFreeRatio=10 -XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC -XX:MaxGCPauseMillis=100 -XX:+AggressiveOpts -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:InitiatingHeapOccupancyPercent=10 -XX:TargetSurvivorRatio=90 -XX:-UseBiasedLocking -XX:+UseLargePagesInMetaspace -XX:+UseNUMA -XX:+UseTransparentHugePages -Dcom.mojang.eula.agree=true -Dlog4j.configurationFile=log4j2.xml -jar minecraft-server.jar --world-dir=worlds > /dev/null 2>&1
     sleep 1
 done' &
 

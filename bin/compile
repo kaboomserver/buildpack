@@ -2,9 +2,9 @@
 BIN_DIR="$(cd "$(dirname "$0")" && pwd)"
 BUILD_DIR=$1
 
-mkdir -p $BUILD_DIR/bin/
-mv $BIN_DIR/start $BUILD_DIR/bin/
-mv $BIN_DIR/excludes $BUILD_DIR/bin/
+mkdir -p $BUILD_DIR/.bin/
+mv $BIN_DIR/start $BUILD_DIR/.bin/
+mv $BIN_DIR/excludes $BUILD_DIR/.bin/
 
 curl -o $BUILD_DIR/minecraft-server.jar -s -L "https://yivesmirror.com/files/paperspigot/PaperSpigot-latest.jar"
 curl -o $BUILD_DIR/plugins/DoBlockImage.jar -s -L "https://api.spiget.org/v2/resources/5454/download"
