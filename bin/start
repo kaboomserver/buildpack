@@ -2,7 +2,7 @@
 mkdir -p crash-reports/ dumps/
 touch banned-ips.json banned-players.json ops.json usercache.json whitelist.json
 echo "$PRIVATE_KEY" > .ssh/id_rsa
-chmod 400 $(find . ! -path "*/.*" ! -path "./worlds/world/region/*" -type f)
+chmod 400 $(find . ! -path "*/.*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
 
 if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/worlds/' | awk '{print $1}')" -gt "500000" ]; then

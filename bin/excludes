@@ -27,5 +27,4 @@ plugins/UltraCosmetics/config.yml
 plugins/UltraCosmetics/messages.yml
 plugins/Updater/
 plugins/WorldEdit/config.yml
-worlds/world/region/
 *.jar
