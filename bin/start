@@ -16,7 +16,7 @@ while true; do
 done &
 
 while true; do
-    ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -o ServerAliveCountMax=9999 -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
+    ssh -o StrictHostKeyChecking=no -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
     sleep 1
 done &
 
