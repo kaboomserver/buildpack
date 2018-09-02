@@ -20,7 +20,7 @@ while true; do
 done &
 
 .bin/tmux new -d -s server 'while true; do
-    .bin/java/bin/java -Xmx200M -Xss512k -XX:MinHeapFreeRatio=1 -XX:MaxHeapFreeRatio=10 -XX:+UseContainerSupport -XX:+ExitOnOutOfMemoryError -Dcom.mojang.eula.agree=true -Dlog4j.configurationFile=log4j2.xml -jar minecraft-server.jar --world-dir=worlds
+    .bin/java/bin/java -Xmx200M -Xss512k -XX:MaxMetaspaceSize=50M -XX:MinHeapFreeRatio=1 -XX:MaxHeapFreeRatio=10 -XX:+UseContainerSupport -XX:+ExitOnOutOfMemoryError -Dcom.mojang.eula.agree=true -Dlog4j.configurationFile=log4j2.xml -jar minecraft-server.jar --world-dir=worlds
     sleep 1
 done' &
 
