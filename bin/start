@@ -20,7 +20,7 @@ while true; do
 done &
 
 .bin/tmux new -d -s server 'while true; do
-    .bin/java/bin/java -Xmx200M -Xss512k -Xtune:virtualized -XX:MaxMetaspaceSize=100M -XX:MaxDirectMemorySize=5M -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -XX:OnOutOfMemoryError="kill -9 %p" -Dcom.mojang.eula.agree=true -Dlog4j.configurationFile=log4j2.xml -jar minecraft-server.jar --world-dir=worlds
+    .bin/java/bin/java -Xmx400M -Xss512k -Xtune:virtualized -XX:MaxMetaspaceSize=100M -XX:MaxDirectMemorySize=5M -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -XX:OnOutOfMemoryError="kill -9 %p" -Dcom.mojang.eula.agree=true -Dlog4j.configurationFile=log4j2.xml -jar minecraft-server.jar --world-dir=worlds
     sleep 1
 done' &
 
