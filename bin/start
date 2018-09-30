@@ -34,14 +34,13 @@ while true; do
 done &
 
 eval $STARTSERVER
-sleep 60
 
 while true; do
-    if [ "echo -n -e '\xFE' | nc localhost 25565 | wc -m" -eq "0" ]; then
+    sleep 120
+    if [ "$(echo -n -e '\xFE' | nc localhost 25565 | wc -m)" -eq 0 ]; then
         .bin/tmux kill-session -t server
         eval $STARTSERVER
     fi
-    sleep 10
 done &
 
 sleep infinity
