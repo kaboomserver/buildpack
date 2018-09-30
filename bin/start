@@ -1,27 +1,27 @@
 #!/bin/bash
 mkdir -p crash-reports/ dumps/
-echo "$PRIVATE_KEY" > .ssh/id_rsa
+#echo "$PRIVATE_KEY" > .ssh/id_rsa
 chmod 400 $(find . ! -path "*/.*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
 
-if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/worlds/' | awk '{print $1}')" -gt "200000" ]; then
-	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'cd sync/ && find . ! -path './plugins/WorldEdit/schematics' -type d -exec rm -rf {} +'
-fi
+#if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/worlds/' | awk '{print $1}')" -gt "200000" ]; then
+#	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'cd sync/ && find . ! -path './plugins/WorldEdit/schematics' -type d -exec rm -rf {} +'
+#fi
 
-if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/plugins/FastAsyncWorldEdit/clipboard/' | awk '{print $1}')" -gt "200000" ]; then
-	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'rm -rf sync/plugins/FastAsyncWorldEdit/clipboard/'
-fi
+#if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/plugins/FastAsyncWorldEdit/clipboard/' | awk '{print $1}')" -gt "200000" ]; then
+#	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'rm -rf sync/plugins/FastAsyncWorldEdit/clipboard/'
+#fi
 
-if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/plugins/FastAsyncWorldEdit/history/' | awk '{print $1}')" -gt "200000" ]; then
-	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'rm -rf sync/plugins/FastAsyncWorldEdit/history/'
-fi
+#if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/plugins/FastAsyncWorldEdit/history/' | awk '{print $1}')" -gt "200000" ]; then
+#	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'rm -rf sync/plugins/FastAsyncWorldEdit/history/'
+#fi
 
-rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from=".bin/excludes" serv@kaboom.pw:sync/plugins serv@kaboom.pw:sync/worlds .
+#rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from=".bin/excludes" serv@kaboom.pw:sync/plugins serv@kaboom.pw:sync/worlds .
 
-while true; do
-    rsync -Waq -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from=".bin/excludes" plugins worlds serv@kaboom.pw:sync/ > /dev/null 2>&1
-    sleep 5
-done &
+#while true; do
+#    rsync -Waq -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" --exclude-from=".bin/excludes" plugins worlds serv@kaboom.pw:sync/ > /dev/null 2>&1
+#    sleep 5
+#done &
 
 while true; do
     ssh -o StrictHostKeyChecking=no -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
