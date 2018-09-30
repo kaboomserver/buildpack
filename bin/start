@@ -5,7 +5,7 @@ chmod 400 $(find . ! -path "*/.*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
 
 STARTSERVER=$(.bin/tmux new -d -s server 'while true; do
-    .bin/java/bin/java -Xmx400M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xtune:virtualized -XX:MaxMetaspaceSize=100M -XX:MaxDirectMemorySize=50M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -D$
+    .bin/java/bin/java -Xmx400M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xtune:virtualized -XX:MaxMetaspaceSize=100M -XX:MaxDirectMemorySize=50M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
     sleep 1
 done' &)
 
