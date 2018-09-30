@@ -4,4 +4,3 @@ BUILD_DIR=$1
 
 mkdir -p $BUILD_DIR/.bin/
 mv $BIN_DIR/start $BUILD_DIR/.bin/
-mv $BIN_DIR/excludes $BUILD_DIR/.bin/
