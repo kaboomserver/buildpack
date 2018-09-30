@@ -16,10 +16,10 @@ chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugin
 #	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'rm -rf sync/plugins/FastAsyncWorldEdit/history/'
 #fi
 
-rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" serv@kaboom.pw:sync/plugins/WorldEdit/schematics .
+rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" serv@kaboom.pw:sync/plugins/WorldEdit/schematics plugins/WorldEdit/
 
 while true; do
-    rsync -Waq -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" plugins/WorldEdit/schematics serv@kaboom.pw:sync/ > /dev/null 2>&1
+    rsync -Waq -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" plugins/WorldEdit/schematics serv@kaboom.pw:sync/plugins/WorldEdit/ > /dev/null 2>&1
     sleep 5
 done &
 
