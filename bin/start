@@ -2,7 +2,7 @@
 mkdir -p crash-reports/ dumps/
 echo "$PRIVATE_KEY" > .ssh/id_rsa
 chmod 400 $(find . ! -path "*/.*" -type f)
-chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
+chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 
 rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" serv@kaboom.pw:sync/plugins/WorldEdit/schematics plugins/WorldEdit/
 
@@ -20,7 +20,7 @@ while true; do
     if [ "$(echo -n -e '\xFE' | nc localhost 25565 | wc -m)" -eq 0 ]; then
         .bin/tmux kill-session -t server
         .bin/tmux new -d -s server 'while true; do
-    		.bin/java/bin/java -Xmx400M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xtune:virtualized -XX:MaxMetaspaceSize=100M -XX:MaxDirectMemorySize=50M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
+    		.bin/java/bin/java -Xmx350M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xtune:virtualized -XX:MaxMetaspaceSize=100M -XX:MaxDirectMemorySize=100M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
     		sleep 1
 	done'
     fi
