@@ -4,27 +4,32 @@ echo "$PRIVATE_KEY" > .ssh/id_rsa
 chmod 400 $(find . ! -path "*/.*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 
-rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" serv@kaboom.pw:sync/plugins/WorldEdit/schematics plugins/WorldEdit/
+git clone git@notabug.org:kaboom/schematics.git plugins/WorldEdit/schematics/
 
 while true; do
-    rsync -Waq -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" plugins/WorldEdit/schematics serv@kaboom.pw:sync/plugins/WorldEdit/ > /dev/null 2>&1
-    sleep 5
+	cd plugins/WorldEdit/schematics/
+	if [ "git status --porcelain" ]; then
+		git add --all
+		git -c user.name='kaboom' -c user.email='' commit -m "Add new schematics"
+		git push
+	fi
+	sleep 1
 done &
 
 while true; do
-    ssh -o StrictHostKeyChecking=no -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
-    sleep 1
+	ssh -o StrictHostKeyChecking=no -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
+	sleep 1
 done &
 
 while true; do
-    if [ "$(echo -n -e '\xFE' | nc localhost 25565 | wc -m)" -eq 0 ]; then
-        .bin/tmux kill-session -t server
-        .bin/tmux new -d -s server 'while true; do
-    		.bin/java/bin/java -Xmx400M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=200M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
-    		sleep 1
-	done'
-    fi
-    sleep 120
+	if [ "$(echo -n -e '\xFE' | nc localhost 25565 | wc -m)" -eq 0 ]; then
+		.bin/tmux kill-session -t server
+		.bin/tmux new -d -s server 'while true; do
+			.bin/java/bin/java -Xmx400M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=200M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
+			sleep 1
+		done'
+	fi
+	sleep 120
 done &
 
 sleep infinity
