@@ -27,13 +27,11 @@ done &
 	sleep 1
 done'
 
-sleep 120
-
 while true; do
+	sleep 120
 	if [ "$(echo -n -e '\xFE' | nc -w 1 localhost 25565 | wc -m)" -eq 0 ]; then
 		kill -9 $(pgrep java)
 	fi
-	sleep 30
 done &
 
 sleep infinity
