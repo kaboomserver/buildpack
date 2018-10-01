@@ -4,23 +4,6 @@ echo "$PRIVATE_KEY" > .ssh/id_rsa
 chmod 400 $(find . ! -path "*/.*" -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/ plugins/Updater/
 
-STARTSERVER=$(.bin/tmux new -d -s server 'while true; do
-    .bin/java/bin/java -Xmx400M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xtune:virtualized -XX:MaxMetaspaceSize=100M -XX:MaxDirectMemorySize=50M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
-    sleep 1
-done' &)
-
-#if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/worlds/' | awk '{print $1}')" -gt "200000" ]; then
-#	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'cd sync/ && find . ! -path './plugins/WorldEdit/schematics' -type d -exec rm -rf {} +'
-#fi
-
-#if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/plugins/FastAsyncWorldEdit/clipboard/' | awk '{print $1}')" -gt "200000" ]; then
-#	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'rm -rf sync/plugins/FastAsyncWorldEdit/clipboard/'
-#fi
-
-#if [ "$(ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x serv@kaboom.pw 'du -s sync/plugins/FastAsyncWorldEdit/history/' | awk '{print $1}')" -gt "200000" ]; then
-#	ssh -o StrictHostKeyChecking=no serv@kaboom.pw 'rm -rf sync/plugins/FastAsyncWorldEdit/history/'
-#fi
-
 rsync -Waqz -e "ssh -o StrictHostKeyChecking=no -T -c aes256-ctr -o Compression=no -x" serv@kaboom.pw:sync/plugins/WorldEdit/schematics plugins/WorldEdit/
 
 while true; do
@@ -33,14 +16,15 @@ while true; do
     sleep 1
 done &
 
-eval $STARTSERVER
-
 while true; do
-    sleep 120
     if [ "$(echo -n -e '\xFE' | nc localhost 25565 | wc -m)" -eq 0 ]; then
         .bin/tmux kill-session -t server
-        eval $STARTSERVER
+        .bin/tmux new -d -s server 'while true; do
+    		.bin/java/bin/java -Xmx400M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xtune:virtualized -XX:MaxMetaspaceSize=100M -XX:MaxDirectMemorySize=50M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
+    		sleep 1
+	done'
     fi
+    sleep 120
 done &
 
 sleep infinity
