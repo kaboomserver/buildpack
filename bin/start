@@ -31,7 +31,7 @@ done'
 
 while true; do
 	sleep 120
-	if [ "$(echo -n -e '\xFE' | nc -w 1 localhost 25565 | wc -m)" -eq 0 ]; then
+	if [ "$(echo -n -e '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 0 ]; then
 		kill -9 $(pgrep java)
 	fi
 done &
