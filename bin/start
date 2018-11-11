@@ -17,6 +17,8 @@ done'
 	sleep 1
 done'
 
+sleep 60
+
 .bin/tmux new -d -s watchdog 'while true; do
 	sleep 120
 	if [ "$(echo -n -e '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 0 ]; then
