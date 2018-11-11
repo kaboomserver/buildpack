@@ -17,10 +17,10 @@ while true; do
 	sleep 1
 done &
 
-while true; do
+.bin/tmux new -d -s remote 'while true; do
 	ssh -o StrictHostKeyChecking=no -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
 	sleep 1
-done &
+done'
 
 .bin/tmux new -d -s server 'while true; do
 	.bin/java/bin/java -Xmx384M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=384M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
