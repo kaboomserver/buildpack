@@ -7,7 +7,24 @@ chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugin
 ssh-keyscan notabug.org >> .ssh/known_hosts
 git clone git@notabug.org:kaboom/schematics.git plugins/WorldEdit/schematics/
 
-while true; do
+.bin/tmux new -d -s server 'while true; do
+	.bin/java/bin/java -Xmx384M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=384M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
+	sleep 1
+done'
+
+.bin/tmux new -d -s remote 'while true; do
+	ssh -o StrictHostKeyChecking=no -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
+	sleep 1
+done'
+
+.bin/tmux new -d -s watchdog 'while true; do
+	sleep 120
+	if [ "$(echo -n -e '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 0 ]; then
+		kill -9 $(pgrep java)
+	fi
+done'
+
+.bin/tmux new -d -s schematics 'while true; do
 	cd $HOME/plugins/WorldEdit/schematics/
 	if [ "git status --porcelain" ]; then
 		git add --all
@@ -15,23 +32,6 @@ while true; do
 		git push > /dev/null 2>&1
 	fi
 	sleep 1
-done &
-
-.bin/tmux new -d -s remote 'while true; do
-	ssh -o StrictHostKeyChecking=no -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
-	sleep 1
 done'
-
-.bin/tmux new -d -s server 'while true; do
-	.bin/java/bin/java -Xmx384M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=384M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
-	sleep 1
-done'
-
-while true; do
-	sleep 120
-	if [ "$(echo -n -e '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 0 ]; then
-		kill -9 $(pgrep java)
-	fi
-done &
 
 sleep infinity
