@@ -11,8 +11,8 @@ while true; do
 	cd $HOME/plugins/WorldEdit/schematics/
 	if [ "git status --porcelain" ]; then
 		git add --all
-		git -c user.name='kaboom' -c user.email='' commit -m "Add new schematics"
-		git push
+		git -c user.name='kaboom' -c user.email='kaboom' commit -m "Add new schematics" > /dev/null 2>&1
+		git push > /dev/null 2>&1
 	fi
 	sleep 1
 done &
