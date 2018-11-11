@@ -8,7 +8,7 @@ ssh-keyscan notabug.org >> .ssh/known_hosts
 git clone git@notabug.org:kaboom/schematics.git plugins/WorldEdit/schematics/
 
 while true; do
-	cd plugins/WorldEdit/schematics/
+	cd $HOME/plugins/WorldEdit/schematics/
 	if [ "git status --porcelain" ]; then
 		git add --all
 		git -c user.name='kaboom' -c user.email='' commit -m "Add new schematics"
