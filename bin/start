@@ -13,7 +13,7 @@ git clone git@notabug.org:kaboom/schematics.git plugins/WorldEdit/schematics/
 done'
 
 .bin/tmux new -d -s remote 'while true; do
-	ssh -o StrictHostKeyChecking=no -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw > /dev/null 2>&1
+	ssh -o StrictHostKeyChecking=no -S none -N -T -R 64518:localhost:25565 serv@kaboom.pw
 	sleep 1
 done'
 
@@ -28,8 +28,8 @@ done'
 	cd $HOME/plugins/WorldEdit/schematics/
 	if [ "git status --porcelain" ]; then
 		git add --all
-		git -c user.name='kaboom' -c user.email='kaboom' commit -m "Add new schematics" > /dev/null 2>&1
-		git push > /dev/null 2>&1
+		git -c user.name='kaboom' -c user.email='kaboom' commit -m "Add new schematics"
+		git push
 	fi
 	sleep 1
 done'
