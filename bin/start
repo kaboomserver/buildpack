@@ -19,16 +19,6 @@ done'
 
 sleep 60
 
-.bin/tmux new -d -s watchdog 'while true; do
-	sleep 120
-	if [ "$(echo -n -e '\xFE' | nc -w 1 localhost 25565 | wc -m)" -eq 0 ]; then
-		echo -n -e '\xFE' | nc -w 1 localhost 25565 | wc -m
-		kill -9 $(pgrep java)
-		echo "killed"
-		echo -n -e '\xFE' | nc -w 1 localhost 25565 | wc -m		
-	fi
-done'
-
 .bin/tmux new -d -s schematics 'while true; do
 	cd $HOME/plugins/WorldEdit/schematics/
 	if [ "git status --porcelain" ]; then
@@ -38,5 +28,12 @@ done'
 	fi
 	sleep 1
 done'
+
+while true; do
+	sleep 120
+	if [ "$(echo -n -e '\xFE' | nc -w 1 localhost 25565 | wc -m)" -eq 0 ]; then
+		kill -9 $(pgrep java)
+	fi
+done &
 
 sleep infinity
