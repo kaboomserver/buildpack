@@ -22,7 +22,10 @@ sleep 60
 .bin/tmux new -d -s watchdog 'while true; do
 	sleep 120
 	if [ "$(echo -n -e '\xFE' | nc -w 1 localhost 25565 | wc -m)" -eq 0 ]; then
+		echo -n -e '\xFE' | nc -w 1 localhost 25565 | wc -m
 		kill -9 $(pgrep java)
+		echo "killed"
+		echo -n -e '\xFE' | nc -w 1 localhost 25565 | wc -m		
 	fi
 done'
 
