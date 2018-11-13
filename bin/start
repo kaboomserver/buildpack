@@ -27,6 +27,7 @@ sleep 60
 		git push
 	fi
 	sleep 1
+	git ls-files -z | xargs -0 git update-index --assume-unchanged
 done'
 
 while true; do
