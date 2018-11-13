@@ -25,9 +25,10 @@ sleep 60
 		git add --all
 		git -c user.name='kaboom' -c user.email='kaboom' commit -m "Add new schematics"
 		git push
+	else
+		git ls-files -z | xargs -0 git update-index --assume-unchanged
 	fi
 	sleep 1
-	git ls-files -z | xargs -0 git update-index --assume-unchanged
 done'
 
 while true; do
