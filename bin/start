@@ -17,8 +17,6 @@ done'
 	sleep 1
 done'
 
-sleep 60
-
 .bin/tmux new -d -s schematics 'while true; do
 	cd $HOME/plugins/WorldEdit/schematics/
 	if [ "git status --porcelain" ]; then
@@ -30,6 +28,8 @@ sleep 60
 	fi
 	sleep 1
 done'
+
+sleep 60
 
 while true; do
 	sleep 120
