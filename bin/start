@@ -1,7 +1,6 @@
 #!/bin/bash
 mkdir -p crash-reports/ dumps/
 echo "$PRIVATE_KEY" > .ssh/id_rsa
-chmod 400 $(find worlds/ -type f)
 chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 
 ssh-keyscan notabug.org >> .ssh/known_hosts
