@@ -1,7 +1,8 @@
 #!/bin/bash
 shutdown() {
-    trap - SIGINT SIGTERM
-    kill -- -$$
+	LOG("SHUTDOWN")
+	kill $(pgrep java)
+	kill $(pgrep ssh)
 }
 
 trap shutdown SIGINT SIGTERM
@@ -45,3 +46,5 @@ while true; do
 done &
 
 sleep infinity
+
+.bin/tmux new -d -s server 'while true; do .bin/java/bin/java -Xmx384M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=384M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds; sleep 1; done'
