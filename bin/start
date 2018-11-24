@@ -1,7 +1,7 @@
 #!/bin/bash
 mkdir -p crash-reports/ dumps/
 echo "$PRIVATE_KEY" > .ssh/id_rsa
-chmod -R 500 crash-reports/ dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
+chmod -R 500 dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 
 ssh-keyscan notabug.org >> .ssh/known_hosts
 git clone git@notabug.org:kaboom/schematics.git plugins/WorldEdit/schematics/
