@@ -1,13 +1,5 @@
 #!/bin/bash
-shutdown() {
-	echo "SHUTDOWN"
-	kill $(pgrep java)
-	sleep 5
-}
-
-trap shutdown SIGTERM
-
-mkdir -p crash-reports/ dumps/
+mkdir -p dumps/
 echo "$PRIVATE_KEY" > .ssh/id_rsa
 chmod -R 500 dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 
