@@ -1,6 +1,6 @@
 #!/bin/bash
 shutdown() {
-	LOG("SHUTDOWN")
+	echo "SHUTDOWN"
 	kill $(pgrep java)
 	kill $(pgrep ssh)
 }
