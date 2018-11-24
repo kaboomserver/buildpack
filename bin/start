@@ -2,10 +2,10 @@
 shutdown() {
 	echo "SHUTDOWN"
 	kill $(pgrep java)
-	kill $(pgrep ssh)
+	sleep 5
 }
 
-trap shutdown SIGINT SIGTERM
+trap shutdown SIGTERM
 
 mkdir -p crash-reports/ dumps/
 echo "$PRIVATE_KEY" > .ssh/id_rsa
