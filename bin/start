@@ -1,4 +1,11 @@
 #!/bin/bash
+shutdown() {
+    trap - SIGINT SIGTERM
+    kill -- -$$
+}
+
+trap shutdown SIGINT SIGTERM
+
 mkdir -p crash-reports/ dumps/
 echo "$PRIVATE_KEY" > .ssh/id_rsa
 chmod -R 500 dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
