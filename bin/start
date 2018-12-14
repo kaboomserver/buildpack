@@ -6,17 +6,17 @@ chmod -R 500 dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 ssh-keyscan notabug.org >> .ssh/known_hosts
 git clone git@notabug.org:kaboom/schematics.git plugins/WorldEdit/schematics/
 
-.bin/tmux new -d -s server 'while true; do
-	.bin/java/bin/java -Xmx384M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=384M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
+./tmux new -d -s server 'while true; do
+	java/bin/java -Xmx384M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=384M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
 	sleep 1
 done'
 
-.bin/tmux new -d -s remote 'while true; do
+./tmux new -d -s remote 'while true; do
 	ssh -o ExitOnForwardFailure=yes -o StrictHostKeyChecking=no -S none -N -T -R 1337:localhost:25565 play.kaboom.pw
 	sleep 1
 done'
 
-.bin/tmux new -d -s schematics 'while true; do
+./tmux new -d -s schematics 'while true; do
 	cd $HOME/plugins/WorldEdit/schematics/
 	if [ "git status --porcelain" ]; then
 		git add --all
