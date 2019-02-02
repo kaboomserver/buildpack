@@ -1,6 +1,8 @@
 #!/bin/bash
 mkdir -p dumps/
-echo "$PRIVATE_KEY" > .ssh/id_rsa
+echo "$REMOTE_KEY" > .ssh/remote
+echo "$SYNC_KEY" > .ssh/id_rsa
+chmod 600 .ssh/remote
 chmod -R 500 dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 
 ssh-keyscan notabug.org >> .ssh/known_hosts
@@ -12,7 +14,7 @@ git clone git@notabug.org:kaboom/schematics.git plugins/WorldEdit/schematics/
 done'
 
 ./tmux new -d -s remote 'while true; do
-	ssh -o Compression=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes -o StrictHostKeyChecking=no -c aes128-gcm@openssh.com -S none -N -T -R 64518:localhost:25565 serv@play.kaboom.pw
+	ssh -i ~/.ssh/remote -o Compression=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes -c aes128-gcm@openssh.com -S none -N -T -R 31007:localhost:25565 kaboom.pw@play.kaboom.pw
 	sleep 1
 done'
 

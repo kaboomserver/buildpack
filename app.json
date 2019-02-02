@@ -1,7 +1,13 @@
 {
   "name": "Kaboom.pw",
-    "PRIVATE_KEY": {
-      "description": "Private key for data sync and reverse SSH",
+  "env": {
+    "REMOTE_KEY": {
+      "description": "Private key for reverse SSH",
       "required": true
+    },
+    "SYNC_KEY": {
+      "description": "Private key for data sync",
+      "required": true
+    }
   }
 }
