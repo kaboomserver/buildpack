@@ -2,5 +2,5 @@
 cat <<EOF
 ---
 default_process_types:
-  worker: start
+  worker: ./start
 EOF
