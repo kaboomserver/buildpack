@@ -1,6 +1,6 @@
 #!/bin/sh
-PATH=$HOME/java/bin/:$HOME/tmux/bin/:$PATH
-LD_LIBRARY_PATH=$HOME/tmux/lib/:$LD_LIBRARY_PATH
+PATH="$HOME/java/bin/:$HOME/tmux/bin/:$PATH"
+export LD_LIBRARY_PATH="$HOME/tmux/lib/:$LD_LIBRARY_PATH"
 
 echo "$REMOTE_KEY" > .ssh/remote
 echo "$SYNC_KEY" > .ssh/id_rsa
