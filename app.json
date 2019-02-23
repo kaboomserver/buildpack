@@ -1,5 +1,5 @@
 {
-  "name": "Kaboom.pw",
+  "name": "Kaboom",
   "env": {
     "REMOTE_KEY": {
       "description": "Private key for reverse SSH",
