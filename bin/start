@@ -20,7 +20,7 @@ done'
 
 ./tmux new -d -s schematics 'while true; do
 	cd $HOME/plugins/WorldEdit/schematics/
-	if [ "git diff --name-only --diff-filter=A HEAD" ]; then
+	if [ "$(git diff --name-only --diff-filter=A HEAD)" ]; then
 		git add --all
 		git -c user.name='kaboom' -c user.email='kaboom' commit -m "Add new schematics"
 		git push
