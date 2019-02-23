@@ -1,4 +1,7 @@
 #!/bin/sh
+PATH=$HOME/java/bin/:$HOME/tmux/bin/:$PATH
+LD_LIBRARY_PATH=$HOME/tmux/lib/:$LD_LIBRARY_PATH
+
 echo "$REMOTE_KEY" > .ssh/remote
 echo "$SYNC_KEY" > .ssh/id_rsa
 chmod 600 .ssh/remote
@@ -11,17 +14,17 @@ chmod -R 500 dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 
 git clone git@notabug.org:kaboom/schematics.git plugins/WorldEdit/schematics/
 
-tmux/bin/tmux new -d -s server 'while true; do
-	java/bin/java -Xmx384M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=384M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
+tmux new -d -s server 'while true; do
+	java -Xmx384M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=384M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
 	sleep 1
 done'
 
-tmux/bin/tmux new -d -s remote 'while true; do
+tmux new -d -s remote 'while true; do
 	ssh -i ~/.ssh/remote -o Compression=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes -c aes128-gcm@openssh.com -S none -N -T -R 64518:localhost:25565 serv@play.kaboom.pw
 	sleep 1
 done'
 
-tmux/bin/tmux new -d -s schematics 'while true; do
+tmux new -d -s schematics 'while true; do
 	cd $HOME/plugins/WorldEdit/schematics/
 	if [ "$(git add $(git ls-files -o) -v)" ]; then
 		git -c user.name='kaboom' -c user.email='kaboom' commit -m "Add new schematics"
