@@ -5,13 +5,13 @@ echo "$REMOTE_KEY" > .ssh/remote
 echo "$SYNC_KEY" > .ssh/id_rsa
 chmod 600 .ssh/remote
 
-ssh-keyscan notabug.org >> .ssh/known_hosts
+ssh-keyscan framagit.org >> .ssh/known_hosts
 ssh-keyscan play.kaboom.pw >> .ssh/known_hosts
 
 mkdir -p dumps/
 chmod -R 500 dumps/ plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 
-git clone git@notabug.org:kaboom/schematics.git plugins/WorldEdit/schematics/
+git clone git@framagit.org:kaboom/core/schematics.git plugins/WorldEdit/schematics/
 
 tmux new -d -s server 'while true; do
 	java -Xmx384M -Xss512k -Xaggressive -Xdisablejavadump -Xnoagent -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=384M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
@@ -26,7 +26,7 @@ done'
 tmux new -d -s schematics 'while true; do
 	cd $HOME/plugins/WorldEdit/schematics/
 	if [ "$(git add $(git ls-files -o) -v)" ]; then
-		git -c user.name='kaboom' -c user.email='kaboom' commit -m "Add new schematics"
+		git -c user.name='kaboom' -c user.email='kaboom.pw' commit -m "Add new schematics"
 		git push
 	fi
 	sleep 1
