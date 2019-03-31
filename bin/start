@@ -6,7 +6,7 @@ echo "$SYNC_KEY" > .ssh/id_rsa
 chmod 600 .ssh/remote
 
 ssh-keyscan framagit.org >> .ssh/known_hosts
-ssh-keyscan play.kaboom.pw >> .ssh/known_hosts
+ssh-keyscan -p 5950 play.kaboom.pw >> .ssh/known_hosts
 
 chmod -R 500 plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 
