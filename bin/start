@@ -12,7 +12,7 @@ chmod -R 500 plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 git clone git@github.com:kaboomserver/schematics.git plugins/WorldEdit/schematics/
 
 tmux new -d -s server 'while true; do
-	java -Xmx512M -Xss512k -Xaggressive -Xdump:none -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=384M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
+	java -Xmx640M -Xss512k -Xaggressive -Xdump:none -Xquickstart -Xshareclasses -XX:MaxDirectMemorySize=384M -XX:-HeapDumpOnOutOfMemoryError -XX:+IdleTuningGcOnIdle -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -jar minecraft-server.jar --world-dir=worlds
 	sleep 1
 done'
 
