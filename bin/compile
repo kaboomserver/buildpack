@@ -2,5 +2,5 @@
 BIN_DIR="$(cd "$(dirname "$0")" && pwd)"
 BUILD_DIR=$1
 
-mv $BIN_DIR/start $BUILD_DIR/
-mv $BIN_DIR/stop $BUILD_DIR/
+mv script $BUILD_DIR/script
+mv $BIN_DIR/start $BUILD_DIR/script/
