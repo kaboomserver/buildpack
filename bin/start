@@ -35,7 +35,7 @@ done'
 tmux new -d -s alivecheck "set -x; while true; do
 	sleep 12
 	DATE_PARSE=$(tail -1 latest.log | grep -oP '(?<=\[).*?(?=\])' | head -1 | date -f - +%s)
-	DATE=${DATE_PARSE:=$(date +%s)}
+	DATE=${DATE_PARSE:-9999999999}
 	if [ "$(env printf '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 1 ] ||
 		[ "$(( $(date +%s) - $DATE ))" -gt 180 ]; then
 		if [ "$(tail -20 $HOME/logs/latest.log | grep -c 'ERROR]: Requested chunk')" -eq 1 ]; then
