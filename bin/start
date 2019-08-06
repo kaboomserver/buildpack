@@ -32,17 +32,17 @@ done'
 
 #sleep 90
 
-tmux new -d -s alivecheck 'while true; do
+tmux new -d -s alivecheck "set -x; while true; do
 	sleep 1
-	if [ "$(env printf \"\xFE\" | nc -w 5 localhost 25565 | wc -m)" -eq 1 ] ||
-		[ "$(( $(date +%s) - $(tail -1 $HOME/logs/latest.log | grep -oP \"(?<=\[).*?(?=\])\" || date +%T | head -1 | date -f - +%s) ))" -gt 180 ]; then
+	if [ "$(env printf '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 1 ] ||
+		[ "$(( $(date +%s) - $(tail -1 $HOME/logs/latest.log | grep -oP '(?<=\[).*?(?=\])' || date +%T | head -1 | date -f - +%s) ))" -gt 180 ]; then
 		if [ "$(pgrep java)" ]; then
 			kill -9 $(pgrep java)
 		fi
-		if [ "$(tail -20 $HOME/logs/latest.log | grep -c \"ERROR]: \Requested \chunk\")" ]; then
+		if [ "$(tail -20 $HOME/logs/latest.log | grep -c 'ERROR]: Requested chunk')" ]; then
 			rm -rf $HOME/worlds/
 		fi
 	fi
-done'
+done"
 
 sleep infinity
