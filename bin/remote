@@ -1,0 +1,5 @@
+#!/bin/sh
+while true; do
+	ssh -i ~/.ssh/remote -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes -c aes128-ctr -C -S none -N -T -R 53950:localhost:25565 -p 53940 remote@play.kaboom.pw
+	sleep 1
+done
