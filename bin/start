@@ -34,9 +34,12 @@ sleep 90
 
 while true; do
 	sleep 120
-	if [ "$(env printf '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 0 ]; then
-		kill -9 $(pgrep java)
-		if tail -20 $HOME/logs/latest.log | grep -c 'ERROR]: Requested chunk'; then
+	if [ "$(env printf '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 0 ] ||
+		[ "$(( $(date +%s) - $(tail -1 $HOME/logs/latest.log | grep -oP '(?<=\[).*?(?=\])' || date +%T | head -1 | date -f - +%s) ))" -gt 180 ]; then
+		if [ "$(pgrep java)" ]; then
+			kill -9 $(pgrep java)
+		fi
+		if [ "$(tail -20 $HOME/logs/latest.log | grep -c 'ERROR]: Requested chunk')" ]; then
 			rm -rf $HOME/worlds/
 		fi
 	fi
