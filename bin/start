@@ -35,10 +35,10 @@ sleep 90
 while true; do
 	sleep 120
 	if [ "$(env printf '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 0 ]; then
+		kill -9 $(pgrep java)
 		if tail -20 $HOME/logs/latest.log | grep -c 'ERROR]: Requested chunk'; then
 			rm -rf $HOME/worlds/
 		fi
-		kill -9 $(pgrep java)
 	fi
 done &
 
