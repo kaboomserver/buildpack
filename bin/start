@@ -30,10 +30,10 @@ tmux new -d -s schematics 'set -x; while true; do
 	sleep 1
 done'
 
-#sleep 90
+sleep 90
 
 tmux new -d -s alivecheck "set -x; while true; do
-	sleep 12
+	sleep 120
 	DATE_PARSE=$(tail -1 latest.log | grep -oP '(?<=\[).*?(?=\])' | head -1 | date -f - +%s)
 	DATE=${DATE_PARSE:=$(date +%s)}
 	if [ "$(env printf '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 1 ] ||
