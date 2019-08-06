@@ -1,6 +1,6 @@
 #!/bin/sh
 while true; do
-	sleep 12
+	sleep 180
 	date="$(tail -1 $HOME/logs/latest.log | grep -oP '(?<=\[).*?(?=\])' | head -1 | date -f - +%s)"
 	if [ "$(env printf '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 1 ] ||
 		[ "$(( $(date +%s) - ${date:=$(date +%s)} ))" -gt 180 ]; then

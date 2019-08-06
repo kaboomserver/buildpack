@@ -15,7 +15,7 @@ tmux new -d -s server 'sh -x script/server'
 tmux new -d -s remote 'sh -x script/remote'
 tmux new -d -s schematics 'sh -x script/schematics'
 
-#sleep 90
+sleep 30
 
 tmux new -d -s alivecheck 'sh -x script/alivecheck'
 
