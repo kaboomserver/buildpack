@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 PATH="$HOME/java/bin/:$HOME/tmux/bin/:$PATH"
 
 echo "$REMOTE_KEY" > .ssh/remote
