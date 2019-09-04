@@ -11,12 +11,18 @@ chmod -R 500 plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 
 git clone git@github.com:kaboomserver/schematics.git plugins/FastAsyncWorldEdit/schematics/
 
-tmux new -d -s server 'sh -x script/server'
-tmux new -d -s remote 'sh -x script/remote'
-tmux new -d -s schematics 'sh -x script/schematics'
+while true; do
+	tmux new -d -s server 'sh -x script/server'
+	tmux new -d -s remote 'sh -x script/remote'
+	tmux new -d -s schematics 'sh -x script/schematics'
+	sleep 5
+done
 
 sleep 30
 
-tmux new -d -s alivecheck 'sh -x script/alivecheck'
+while true; do
+	tmux new -d -s alivecheck 'sh -x script/alivecheck'
+	sleep 5
+done
 
 sleep infinity
