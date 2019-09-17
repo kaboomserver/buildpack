@@ -16,13 +16,13 @@ while true; do
 	tmux new -d -s remote 'sh -x script/remote'
 	tmux new -d -s schematics 'sh -x script/schematics'
 	sleep 5
-done
+done &
 
 sleep 30
 
 while true; do
 	tmux new -d -s alivecheck 'sh -x script/alivecheck'
 	sleep 5
-done
+done &
 
 sleep infinity
