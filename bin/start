@@ -14,13 +14,13 @@ git clone git@github.com:kaboomserver/schematics.git plugins/FastAsyncWorldEdit/
 tmux set-option status off
 
 while true; do
-	tmux new -d -s server 'sh -x script/server' >/dev/null
+	tmux new -d -s server 'sh -c script/server' >/dev/null
 	tmux new -d -s remote 'sh -x script/remote' >/dev/null
 	tmux new -d -s schematics 'sh -x script/schematics' >/dev/null
-	ttyd -p $PORT tmux attach -t server
 	sleep 5
 done &
 
+ttyd -p $PORT tmux attach -t server
 sleep 30
 
 while true; do
