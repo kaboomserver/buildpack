@@ -1,5 +1,6 @@
 #!/bin/sh
 while true; do
+	stty -isig intr
 	ttyd -p $PORT java -Xmx384M -Xss512k -Xaggressive -Xcompressedrefs -Xdump:none -Xgcpolicy:balanced -Xcompactexplicitgc -Xcompactgc -Xquickstart -Xshareclasses -XX:-HeapDumpOnOutOfMemoryError -XX:MaxDirectMemorySize=64M -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -Dpaper.playerconnection.keepalive=360 -jar minecraft-server.jar --world-dir=worlds
 	sleep 1
 done
