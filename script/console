@@ -2,6 +2,5 @@
 client=$RANDOM
 
 tmux/bin/tmux new-session -d -t server -s $client
-tmux/bin/tmux new-window
-tmux send-keys -t $client $@
-tmux attach -t $client
+tmux/bin/tmux send-keys -t $client $@
+tmux/bin/tmux attach -t $client
