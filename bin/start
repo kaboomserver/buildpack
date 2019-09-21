@@ -11,7 +11,7 @@ chmod -R 500 plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
 
 git clone git@github.com:kaboomserver/schematics.git plugins/FastAsyncWorldEdit/schematics/
 
-tmux set-option status off
+tmux set -g status off
 
 while true; do
 	tmux new -d -s server 'sh -c script/server' >/dev/null
@@ -20,7 +20,7 @@ while true; do
 	sleep 5
 done &
 
-ttyd -p $PORT tmux attach -t server
+ttyd -p $PORT tmux attach -t server &
 sleep 30
 
 while true; do
