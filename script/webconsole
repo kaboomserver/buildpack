@@ -1,6 +1,6 @@
 #!/bin/sh
 cd $HOME/plugins/WebConsole/client/
 while true; do
-	python3 -m http.server $PORT
+	python3 -m http.server $PORT --bind $HOST
 	sleep 1
 done
