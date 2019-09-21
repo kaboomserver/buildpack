@@ -20,7 +20,7 @@ while true; do
 	sleep 5
 done &
 
-ttyd -p $PORT tmux new-session -t server &
+ttyd -p $PORT script/console &
 sleep 30
 
 while true; do
