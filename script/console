@@ -1,5 +1,5 @@
 #!/bin/sh
-$client=$RANDOM
+client=$RANDOM
 
 tmux/bin/tmux new-session -d -t server -s $client
 tmux/bin/tmux new-window
