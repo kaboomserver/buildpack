@@ -15,7 +15,7 @@ while true; do
 	tmux new -d -s server 'sh -x script/server' >/dev/null
 	tmux new -d -s remote 'sh -x script/remote' >/dev/null
 	tmux new -d -s schematics 'sh -x script/schematics' >/dev/null
-	trap 'trap' SIGINT && ttyd -p $PORT tmux attach -t server
+	stty intr undef && ttyd -p $PORT tmux attach -t server
 	sleep 5
 done &
 
