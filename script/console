@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 client=$RANDOM
 
 tmux/bin/tmux new-session -d -t server -s $client
