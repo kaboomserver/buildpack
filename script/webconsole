@@ -1,0 +1,6 @@
+#!/bin/sh
+cd $HOME/plugins/WebConsole/client/
+while true; do
+	python3 -m http.server $PORT
+	sleep 1
+done
