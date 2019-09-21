@@ -20,7 +20,7 @@ while true; do
 	sleep 5
 done &
 
-ttyd -p $PORT script/console &
+ttyd -p $PORT sh -c script/console &
 sleep 30
 
 while true; do
