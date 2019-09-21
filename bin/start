@@ -20,7 +20,7 @@ while true; do
 	sleep 5
 done &
 
-ttyd -p $PORT tmux attach -t server &
+ttyd -p $PORT tmux new-session -t server &
 sleep 30
 
 while true; do
