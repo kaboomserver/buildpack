@@ -1,6 +1,6 @@
 #!/bin/sh
 while true; do
-	sleep 180
+	sleep 420
 	logfile=$HOME/logs/latest.log
 	if [ "$(env printf '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 0 ]; then
 		if [ -f "$logfile" ]; then

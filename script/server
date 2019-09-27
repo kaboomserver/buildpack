@@ -1,6 +1,8 @@
 #!/bin/sh
 while true; do
 	stty intr undef
+	tmux new -d -s alivecheck 'sh -x script/alivecheck'
 	java -Xmx384M -Xss512k -Xaggressive -Xcompressedrefs -Xdump:none -Xgcpolicy:balanced -Xcompactexplicitgc -Xcompactgc -Xquickstart -Xshareclasses -XX:-HeapDumpOnOutOfMemoryError -XX:MaxDirectMemorySize=64M -XX:+UseContainerSupport -Dcom.mojang.eula.agree=true -Dpaper.playerconnection.keepalive=360 -DIReallyKnowWhatIAmDoingISwear -jar minecraft-server.jar --world-dir=worlds
+	tmux kill-session -t alivecheck
 	sleep 1
 done
