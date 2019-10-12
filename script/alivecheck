@@ -10,8 +10,7 @@ while true; do
 		fi
 		pkill -9 java
 	elif [ -f "$logfile" ]; then
-		date="$(tail -1 $logfile | grep -oP '(?<=\[).*?(?=\])' | head -1 | date -f - +%s)"
-		if [ "$(( $(date +%s) - ${date:=$(date +%s)} ))" -gt 180 ]; then
+		if [ "$(( $(date +%s) - $(date -r $logfile +%s) ))" -gt 180 ]; then
 			if [ "$(tail -20 $logfile | grep -c 'ERROR]: Requested chunk')" -eq 1 ]; then
 				rm -rf $HOME/worlds/
 			fi
