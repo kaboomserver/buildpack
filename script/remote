@@ -1,3 +1,3 @@
 #!/bin/sh
 export AUTOSSH_POLL=30
-autossh -M 53941 -i ~/.ssh/remote -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes -c aes128-ctr -C -S none -N -T -R 53950:localhost:25565 -R 53951:localhost:25566 -p 53940 remote@play.kaboom.pw
+autossh -M 25564 -i ~/.ssh/remote -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes -c aes128-ctr -C -S none -N -T -R 25565:localhost:25565 remote@play.kaboom.pw
