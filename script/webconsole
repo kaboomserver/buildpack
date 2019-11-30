@@ -1,7 +1,0 @@
-#!/bin/sh
-cd $HOME/plugins/FastAsyncWorldEdit/schematics/
-
-while true; do
-	python3 -m http.server $PORT --bind 0.0.0.0
-	sleep 1
-done

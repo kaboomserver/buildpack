@@ -2,5 +2,15 @@
 BIN_DIR="$(cd "$(dirname "$0")" && pwd)"
 BUILD_DIR=$1
 
+# Build dtach for running server in background
+
+cd src/detach*
+./configure
+make
+mkdir $BUILD_DIR/detach/bin/
+mv detach $BUILD_DIR/detach/bin/
+
+# Set up scripts
+
 mv script $BUILD_DIR/script
 mv $BIN_DIR/start $BUILD_DIR/script/

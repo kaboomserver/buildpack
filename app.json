@@ -1,12 +1,12 @@
 {
   "name": "Kaboom",
   "env": {
-    "REMOTE_KEY": {
-      "description": "Private key for reverse SSH",
+    "PROXY_KEY": {
+      "description": "Private key for proxy server",
       "required": true
     },
-    "SYNC_KEY": {
-      "description": "Private key for data sync",
+    "SCHEMATIC_KEY": {
+      "description": "Private key for schematic repository",
       "required": true
     }
   }
