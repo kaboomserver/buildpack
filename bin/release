@@ -2,5 +2,5 @@
 cat <<EOF
 ---
 default_process_types:
-  worker: script/start
+  worker: script/init.sh
 EOF

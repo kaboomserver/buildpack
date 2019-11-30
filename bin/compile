@@ -2,15 +2,15 @@
 BIN_DIR="$(cd "$(dirname "$0")" && pwd)"
 BUILD_DIR=$1
 
-# Build dtach for running server in background
+# Build dtach for running scripts in the background
 
 cd src/dtach*
 ./configure
 make
-mkdir $BUILD_DIR/dtach/bin/
+mkdir -p $BUILD_DIR/dtach/bin/
 mv dtach $BUILD_DIR/dtach/bin/
 
-# Set up scripts
+# Move scripts to the build directory, which is then moved
+# to the dyno
 
 mv script $BUILD_DIR/script
-mv $BIN_DIR/start $BUILD_DIR/script/
