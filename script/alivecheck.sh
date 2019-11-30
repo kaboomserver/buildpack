@@ -3,6 +3,8 @@
 # The following script is a failsafe for killing the Minecraft server if it happens
 # to be stuck
 
+set -x
+
 while true; do
 	sleep 420
 	logfile=$HOME/logs/latest.log

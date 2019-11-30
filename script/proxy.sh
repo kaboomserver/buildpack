@@ -4,6 +4,8 @@
 # permits incoming connections
 # Resources for setting up the proxy server: https://github.com/kaboomserver/proxy
 
+set -x
+
 ssh -i ~/.ssh/remote \
 	-o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes \
 	-c aes128-ctr \

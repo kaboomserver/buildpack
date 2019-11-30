@@ -3,6 +3,8 @@
 # Schematics are saved in a separate git repository, which is cloned whenever Heroku starts
 # from a fresh state. Only non-existing files are added to the repository.
 
+set -x
+
 git clone git@github.com:kaboomserver/schematics.git $HOME/plugins/FastAsyncWorldEdit/schematics/
 
 while true; do
