@@ -9,6 +9,7 @@ cd src/dtach*
 make
 mkdir -p $BUILD_DIR/dtach/bin/
 mv dtach $BUILD_DIR/dtach/bin/
+cd ../../
 
 # Move scripts to the build directory, which is then moved
 # to the dyno
