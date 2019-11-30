@@ -4,14 +4,17 @@ BUILD_DIR=$1
 
 # Build dtach for running scripts in the background
 
-cd src/dtach*
+cd vendor/dtach/
 ./configure
 make
 mkdir -p $BUILD_DIR/dtach/bin/
 mv dtach $BUILD_DIR/dtach/bin/
 cd ../../
 
-# Move scripts to the build directory, which is then moved
-# to the dyno
+# Move Java files to the dyno
+
+mv java $BUILD_DIR/java
+
+# Move scripts to the dyno
 
 mv script $BUILD_DIR/script
