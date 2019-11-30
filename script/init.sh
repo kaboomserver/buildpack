@@ -17,9 +17,9 @@ ssh-keyscan github.com >> .ssh/known_hosts
 # checker in the background
 
 while true; do
-	dtach -n server 'sh -c script/server'
-	dtach -n proxy 'sh -x script/proxy'
-	dtach -n schematics 'sh -x script/schematics'
+	dtach -n server 'sh -c script/server.sh'
+	dtach -n proxy 'sh -x script/proxy.sh'
+	dtach -n schematics 'sh -x script/schematics.sh'
 	sleep 5
 done &
 
