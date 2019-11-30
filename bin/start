@@ -7,7 +7,7 @@ chmod 600 .ssh/remote
 
 ssh-keyscan github.com >> .ssh/known_hosts
 
-chmod -R 500 plugins/bStats/ plugins/PluginMetrics/ plugins/ProtocolLib/
+chmod -R 500 plugins/bStats/ plugins/PluginMetrics/
 
 git clone git@github.com:kaboomserver/schematics.git plugins/FastAsyncWorldEdit/schematics/
 
