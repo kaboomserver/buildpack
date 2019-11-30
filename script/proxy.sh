@@ -6,7 +6,7 @@
 
 set -x
 
-ssh -i ~/.ssh/remote \
+ssh -i ~/.ssh/proxy \
 	-o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes \
 	-c aes128-ctr \
 	-C -S none -N -T -R \
