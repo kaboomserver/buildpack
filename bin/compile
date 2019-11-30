@@ -13,7 +13,7 @@ cd ../../
 
 # Move Java files to the dyno
 
-mv java $BUILD_DIR/java
+mv vendor/java $BUILD_DIR/java
 
 # Move scripts to the dyno
 
