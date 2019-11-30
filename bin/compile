@@ -4,11 +4,11 @@ BUILD_DIR=$1
 
 # Build dtach for running server in background
 
-cd src/detach*
+cd src/dtach*
 ./configure
 make
-mkdir $BUILD_DIR/detach/bin/
-mv detach $BUILD_DIR/detach/bin/
+mkdir $BUILD_DIR/dtach/bin/
+mv dtach $BUILD_DIR/dtach/bin/
 
 # Set up scripts
 
