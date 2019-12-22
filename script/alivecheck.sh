@@ -15,7 +15,8 @@ while true; do
 		# 3 minutes, kill the server
 
 		if [ "$(env printf '\xFE' | nc -w 5 localhost 25565 | wc -m)" -eq 0 ] ||
-			[ "$(( $(date +%s) - $(date -r $logfile +%s) ))" -gt 180 ]; then
+			[ "$(( $(date +%s) - $(date -r $logfile +%s) ))" -gt 180 ] ||
+			[ "$(tail -5 $logfile | grep -cE 'Server thread|Paper Watchdog Thread|Async Chat Thread')" -eq 0 ]; then
 			if [ "$(tail -20 $logfile | grep -c 'ERROR]: Requested chunk')" -eq 1 ]; then
 				rm -rf $HOME/worlds/
 			fi
