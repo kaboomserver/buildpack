@@ -15,10 +15,11 @@ ssh-keyscan github.com >> .ssh/known_hosts
 
 # Make certain files read-only
 
-touch banned-ips.json
-touch banned-players.json
-touch ops.json
-touch whitelist.json
+echo "[]" > banned-ips.json
+echo "[]" > banned-players.json
+echo "[]" > ops.json
+echo "[]" > whitelist.json
+
 chmod 400 banned-ips.json
 chmod 400 banned-players.json
 chmod 400 ops.json
