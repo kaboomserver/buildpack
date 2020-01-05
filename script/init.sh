@@ -13,18 +13,6 @@ chmod 600 .ssh/proxy
 echo "$SCHEMATIC_KEY" > .ssh/id_rsa
 ssh-keyscan github.com >> .ssh/known_hosts
 
-# Make certain files read-only
-
-echo "[]" > banned-ips.json
-echo "[]" > banned-players.json
-echo "[]" > ops.json
-echo "[]" > whitelist.json
-
-chmod 400 banned-ips.json
-chmod 400 banned-players.json
-chmod 400 ops.json
-chmod 400 whitelist.json
-
 # Run scripts for starting the Minecraft server, reverse proxy and schematic
 # checker in the background
 
