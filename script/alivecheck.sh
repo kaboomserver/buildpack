@@ -14,8 +14,7 @@ while true; do
 		# If localhost:25565 doesn't respond to ping, or if the log file is older than
 		# 3 minutes, kill the server
 
-		if [ "$(( $(date +%s) - $(date -r $logfile +%s) ))" -gt 180 ] ||
-			[ "$(tail -20 $logfile | grep -cE 'Server thread|Paper Watchdog Thread|Async Chat Thread')" -eq 0 ]; then
+		if [ "$(( $(date +%s) - $(date -r $logfile +%s) ))" -gt 180 ]; then
 			if [ "$(tail -20 $logfile | grep -c 'ERROR]: Requested chunk')" -eq 1 ]; then
 				rm -rf $HOME/worlds/
 			fi
