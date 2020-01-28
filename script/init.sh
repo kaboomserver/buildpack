@@ -7,7 +7,7 @@ PATH="$HOME/dtach/bin/:$HOME/java/bin/:$HOME/rtun/bin/:$PATH"
 # Set up SSH for proxy server and schematics repository
 # Load keys from environmental variables
 
-echo "$PROXY_KEY" >> rtun/rtun.yml
+echo -n "$PROXY_KEY" >> rtun/rtun.yml
 
 echo "$SCHEMATIC_KEY" > .ssh/id_rsa
 ssh-keyscan github.com >> .ssh/known_hosts
