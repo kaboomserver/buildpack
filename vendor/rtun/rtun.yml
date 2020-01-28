@@ -1,0 +1,14 @@
+# Specify the gateway server.
+gateway_url: ws://play.kaboom.pw:25564
+
+forwards:
+  - port: 25565/tcp
+    destination: 127.0.0.1:25565
+
+  - port: 25565/udp
+    destination: 127.0.0.1:25565
+
+  - port: 19132/udp
+    destination: 127.0.0.1:19132
+
+auth_key: 
