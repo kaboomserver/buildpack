@@ -4,4 +4,4 @@
 # permits incoming connections
 # Resources for setting up the proxy server: https://github.com/kaboomserver/proxy
 
-rtun
+rtun -f $HOME/rtun/rtun.yml
