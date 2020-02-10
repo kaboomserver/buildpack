@@ -6,18 +6,6 @@
 mkdir -p $HOME/plugins/Essentials/userdata/
 chmod -R 500 $HOME/plugins/bStats/ $HOME/plugins/Essentials/userdata/ $HOME/plugins/PluginMetrics/
 
-# Make certain files read-only
-
-echo "[]" > banned-ips.json
-echo "[]" > banned-players.json
-echo "[]" > ops.json
-echo "[]" > whitelist.json
-
-chmod 400 banned-ips.json
-chmod 400 banned-players.json
-chmod 400 ops.json
-chmod 400 whitelist.json
-
 dtach -n alivecheck $HOME/script/alivecheck.sh
 
 while true; do
