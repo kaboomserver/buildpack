@@ -4,4 +4,11 @@
 # permits incoming connections
 # Resources for setting up the proxy server: https://github.com/kaboomserver/proxy
 
-rtun -f $HOME/rtun/rtun.yml
+set -x
+
+ssh -i ~/.ssh/proxy \
+	-o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes \
+	-c aes128-ctr \
+	-C -S none -N -T -R \
+	25565:localhost:25565 \
+	remote@play.kaboom.pw
