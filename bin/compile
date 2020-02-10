@@ -11,10 +11,6 @@ mkdir -p $BUILD_DIR/dtach/bin/
 mv dtach $BUILD_DIR/dtach/bin/
 cd ../../
 
-# Move rtun files to the dyno
-
-mv vendor/rtun $BUILD_DIR/rtun
-
 # Move Java files to the dyno
 
 mv vendor/java $BUILD_DIR/java
