@@ -6,9 +6,12 @@
 
 set -x
 
-ssh -i ~/.ssh/proxy \
-	-o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes \
-	-c aes128-ctr \
-	-C -S none -N -T -R \
-	25565:localhost:25565 \
-	remote@play.kaboom.pw
+while true; do
+	ssh -i ~/.ssh/proxy \
+		-o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes \
+		-c aes128-ctr \
+		-C -S none -N -T -R \
+		25565:localhost:25565 \
+		remote@play.kaboom.pw
+	sleep 1
+done
