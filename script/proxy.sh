@@ -7,7 +7,10 @@
 set -x
 
 while true; do
-	ssh -i ~/.ssh/proxy \
+	autossh -M 0 \
+		-o "ServerAliveInterval 30" \
+		-o "ServerAliveCountMax 3" \
+		-i ~/.ssh/proxy \
 		-o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes \
 		-c aes128-ctr \
 		-C -S none -N -T -R \

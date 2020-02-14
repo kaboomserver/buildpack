@@ -2,6 +2,16 @@
 BIN_DIR="$(cd "$(dirname "$0")" && pwd)"
 BUILD_DIR=$1
 
+# Build autossh for reliable SSH tunnels
+
+cd vendor/autossh/
+./configure
+make
+mkdir -p $BUILD_DIR/autossh/bin/
+mv autossh $BUILD_DIR/autossh/bin/
+cd ../../
+
+
 # Build dtach for running scripts in the background
 
 cd vendor/dtach/

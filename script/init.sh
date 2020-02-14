@@ -2,7 +2,7 @@
 
 # This is the core script that Heroku uses when booting up a dyno
 
-PATH="$HOME/dtach/bin/:$HOME/java/bin/:$PATH"
+PATH="$HOME/autossh/bin/:$HOME/dtach/bin/:$HOME/java/bin/:$PATH"
 
 # Set up SSH for proxy server and schematics repository
 # Load keys from environmental variables
