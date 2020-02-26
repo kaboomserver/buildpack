@@ -7,19 +7,20 @@ set -x
 
 while true; do
 	sleep 420
-	logfile=$HOME/logs/latest.log
+	#logfile=$HOME/logs/latest.log
 
-	if [ -f "$logfile" ]; then
+	#if [ -f "$logfile" ]; then
 
 		# If localhost:25565 doesn't respond to ping, or if the log file is older than
 		# 3 minutes, kill the server
 
-		if [ "$(env printf '\xFE' | nc -w 15 localhost 25565 | wc -m)" -eq 0 ] ||
-			[ "$(( $(date +%s) - $(date -r $logfile +%s) ))" -gt 300 ]; then
-			if [ "$(tail -20 $logfile | grep -c 'ERROR]: Requested chunk')" -eq 1 ]; then
-				rm -rf $HOME/worlds/
-			fi
+		if [ "$(env printf '\xFE' | nc -w 15 localhost 25565 | wc -m)" -eq 0 ]; then # ||
+			#[ "$(( $(date +%s) - $(date -r $logfile +%s) ))" -gt 300 ]; then
+			#if [ "$(tail -20 $logfile | grep -c 'ERROR]: Requested chunk')" -eq 1 ]; then
+			#	rm -rf $HOME/worlds/
+			#fi
 			pkill -9 java
+			echo $(date) >> kill.log
 		fi
-	fi
+	#fi
 done
