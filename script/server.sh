@@ -3,7 +3,7 @@
 # The alive checker and Minecraft server is started at the same time. For performance reasons, the
 # OpenJ9 JVM is used instead of Java's default Hotspot JVM.
 
-chmod -R 500 $HOME/plugins/bStats/ $HOME/plugins/PluginMetrics/
+chmod -R 500 $HOME/plugins/bStats/ $HOME/plugins/PluginMetrics/ $HOME/plugins/ProtocolLib/
 
 dtach -n alivecheck $HOME/script/alivecheck.sh
 
