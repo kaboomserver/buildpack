@@ -11,15 +11,12 @@ while true; do
 
 	#if [ -f "$logfile" ]; then
 
-		# If localhost:25565 doesn't respond to ping, or if the log file is older than
+		# If server doesn't respond to ping, or if the log file is older than
 		# 3 minutes, kill the server
 
-		if [ "$(env printf '\xFE' | nc -w 15 localhost 25565 | wc -m)" -eq 0 ]; then # ||
-			#[ "$(( $(date +%s) - $(date -r $logfile +%s) ))" -gt 300 ]; then
-			#if [ "$(tail -20 $logfile | grep -c 'ERROR]: Requested chunk')" -eq 1 ]; then
-			#	rm -rf $HOME/worlds/
-			#fi
+		if [ "$(env printf '\xFE' | nc -w 15 play.kaboom.pw 25565 | wc -m)" -eq 0 ]; then
 			pkill -9 java
+			kill -9 `cat $AUTOSSH_PIDFILE`
 			echo $(date) >> kill.log
 		fi
 	#fi
