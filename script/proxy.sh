@@ -7,14 +7,12 @@
 set -x
 
 while true; do
-	autossh -M 0 \
-		-o "ServerAliveInterval 30" \
-		-o "ServerAliveCountMax 3" \
-		-i ~/.ssh/proxy \
+	ssh -i ~/.ssh/proxy \
 		-o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -o StreamLocalBindUnlink=yes \
 		-c aes128-ctr \
 		-C -S none -N -T -R \
 		25565:localhost:25565 \
 		remote@play.kaboom.pw
+	export PROXY_PID=$!
 	sleep 1
 done
