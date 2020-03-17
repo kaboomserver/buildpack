@@ -7,17 +7,13 @@ set -x
 
 while true; do
 	sleep 420
-	#logfile=$HOME/logs/latest.log
 
-	#if [ -f "$logfile" ]; then
+	# If server doesn't respond to ping, or if the log file is older than
+	# 3 minutes, kill the server
 
-		# If server doesn't respond to ping, or if the log file is older than
-		# 3 minutes, kill the server
-
-		if [ "$(env printf '\xFE' | nc -w 15 play.kaboom.pw 25565 | wc -m)" -eq 0 ]; then
-			pkill -9 java
-			kill -9 $PROXY_PID
-			echo $(date) >> kill.log
-		fi
-	#fi
+	if [ "$(env printf '\xFE' | nc -w 15 play.kaboom.pw 25565 | wc -m)" -eq 0 ]; then
+		pkill -9 java
+		pkill -9 -F ~/proxy.pid
+		echo $(date) >> ~/kill.log
+	fi
 done

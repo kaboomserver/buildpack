@@ -13,6 +13,6 @@ while true; do
 		-C -S none -N -T -R \
 		25565:localhost:25565 \
 		remote@play.kaboom.pw
-	export PROXY_PID=$!
+	echo $! >> ~/proxy.pid
 	sleep 1
 done
