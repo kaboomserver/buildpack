@@ -17,6 +17,6 @@ chmod 400 server-icon.png
 chmod 400 wepif.yml
 
 while true; do
-	java -Xmx300M -Xtune:virtualized -Xaggressive -Xcompressedrefs -Xdump:heap+java+snap:none -Xdump:tool:events=throw+systhrow,filter=java/lang/OutOfMemoryError,exec="kill -9 %pid" -Xgc:concurrentScavenge -Xgc:dnssExpectedTimeRatioMaximum=3 -Xgc:scvNoAdaptiveTenure -Xdisableexplicitgc -Xshareclasses -Xshareclasses:noPersistentDiskSpaceCheck -XX:MaxDirectMemorySize=128M -XX:+ClassRelationshipVerifier -XX:+UseContainerSupport -DPaper.IgnoreJavaVersion=true -Dpaper.playerconnection.keepalive=360 -DIReallyKnowWhatIAmDoingISwear -jar server.jar
+	java -Xmx384M -Xtune:virtualized -Xaggressive -Xcompressedrefs -Xdump:heap+java+snap:none -Xdump:tool:events=throw+systhrow,filter=java/lang/OutOfMemoryError,exec="kill -9 %pid" -Xgc:concurrentScavenge -Xgc:dnssExpectedTimeRatioMaximum=3 -Xgc:scvNoAdaptiveTenure -Xdisableexplicitgc -Xshareclasses -Xshareclasses:noPersistentDiskSpaceCheck -XX:MaxDirectMemorySize=64M -XX:+ClassRelationshipVerifier -XX:+UseContainerSupport -DPaper.IgnoreJavaVersion=true -Dpaper.playerconnection.keepalive=360 -DIReallyKnowWhatIAmDoingISwear -jar server.jar
 	sleep 1
 done
