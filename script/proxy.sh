@@ -12,6 +12,6 @@ while true; do
 		-c aes128-ctr \
 		-C -S none -N -T -R \
 		25565:localhost:25565 \
-		remote@play.kaboom.pw
+		remote@152.67.69.20
 	sleep 1
 done
