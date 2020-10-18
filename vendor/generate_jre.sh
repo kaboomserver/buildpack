@@ -3,7 +3,7 @@
 # This script is used as a reference to generate a stripped-down JRE for the server
 
 rm -rf java/
-wget https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15%2B36_openj9-0.22.0/OpenJDK15U-jdk_x64_linux_openj9_15_36_openj9-0.22.0.tar.gz
+wget https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.2%2B12_openj9-0.21.0/OpenJDK14U-jdk_x64_linux_openj9_14.0.2_12_openj9-0.21.0.tar.gz
 tar -zxvf OpenJDK*
 rm OpenJDK*
 mv jdk* jdk/
