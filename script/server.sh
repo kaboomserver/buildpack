@@ -28,11 +28,21 @@ while true; do
 	# Start Minecraft server
 
 	java \
-		-Xmx384M \
-		-Xshare:on \
-		-Xss8M \
-		-XX:MaxDirectMemorySize=64M \
-		-XX:+UseContainerSupport \
+        -Xmx384M \
+        -Xtune:virtualized \
+        -Xaggressive \
+        -Xcompressedrefs \
+        -Xdump:heap+java+snap:none \
+        -Xdump:tool:events=throw+systhrow,filter=java/lang/OutOfMemoryError,exec="kill -9 %pid" \
+        -Xgc:concurrentScavenge \
+        -Xgc:dnssExpectedTimeRatioMaximum=3 \
+        -Xgc:scvNoAdaptiveTenure \
+        -Xdisableexplicitgc \
+        -Xshareclasses \
+        -Xshareclasses:noPersistentDiskSpaceCheck \
+        -XX:MaxDirectMemorySize=64M \
+        -XX:+ClassRelationshipVerifier \
+        -XX:+UseContainerSupport \
 		-DPaper.IgnoreJavaVersion=true \
 		-Dpaper.playerconnection.keepalive=360 \
 		-DIReallyKnowWhatIAmDoingISwear \
