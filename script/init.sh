@@ -2,7 +2,7 @@
 
 # This is the core script that Heroku uses when booting up a dyno
 
-PATH="$HOME/autossh/bin/:$HOME/dtach/bin/:$HOME/java/bin/:$PATH"
+PATH="$HOME/dtach/bin/:$HOME/java/bin/:$PATH"
 
 # Set up SSH for proxy server and schematics repository
 # Load keys from environmental variables
@@ -17,9 +17,9 @@ ssh-keyscan github.com >> .ssh/known_hosts
 # checker in the background
 
 while true; do
-	dtach -n server script/server.sh > /dev/null 2>&1
-	dtach -n proxy script/proxy.sh > /dev/null 2>&1
-	dtach -n schematics script/schematics.sh > /dev/null 2>&1
+	dtach -n server ~/script/server.sh > /dev/null 2>&1
+	dtach -n proxy ~/script/proxy.sh > /dev/null 2>&1
+	# dtach -n schematics ~/script/schematics.sh > /dev/null 2>&1
 	sleep 5
 done &
 
