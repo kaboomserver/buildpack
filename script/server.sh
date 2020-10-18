@@ -2,9 +2,6 @@
 
 # The alive checker and Minecraft server is started at the same time
 
-# Dump classes
-java -Xshare:dump
-
 while true; do
 	# Make certain files and folders read-only
 

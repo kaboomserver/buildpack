@@ -9,6 +9,6 @@ rm OpenJDK*
 mv jdk* jdk/
 jdk/bin/jlink --no-header-files --no-man-pages --compress=2 --strip-debug \
 	--exclude-files=**java_*.properties,**jrunscript,**keytool,**legal/** \
-	--add-modules java.desktop,java.logging,java.management,java.naming,java.net.http,java.scripting,java.sql,jdk.crypto.ec,jdk.unsupported,jdk.zipfs \
+	--add-modules java.desktop,java.logging,java.management,java.naming,java.net.http,java.scripting,java.sql,jdk.crypto.ec,jdk.unsupported,jdk.zipfs,openj9.sharedclasses \
 	--output java
 rm -rf jdk/
